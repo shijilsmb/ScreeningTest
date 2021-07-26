@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ScreeningTest</string>
+
+    <string name="server_client_id">501339127874-s3hfqtega5s42uo6j85cja4lebf1ln2e.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="txt_storage_rationale">App need access your storage</string>
+
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="logout">Logout</string>
+    <string name="login">Login</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="alert_logout">Are you sure ?</string>
+</resources>
