@@ -64,26 +64,15 @@ class MainFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         }
 
-        val account = GoogleSignIn.getLastSignedInAccount(requireActivity().applicationContext)
-
         bt_select.setOnClickListener {
+            val account = GoogleSignIn.getLastSignedInAccount(requireActivity().applicationContext)
             if (account == null) {
                 signIn()
             } else {
                 //email.setText(account.email)
-                val directoryPickerDialog = DirectoryPickerDialog(requireActivity(),
-                    { Toast.makeText(requireActivity(), "Canceled!!", Toast.LENGTH_SHORT).show() }
-                ) { files ->
-                    /*Toast.makeText(
-                        requireActivity(),
-                        files.get(0).getPath(),
-                        Toast.LENGTH_SHORT
-                    ).show()*/
-                    filePath =  files.get(0).getPath()
 
-                    uploadFile()
-                }
-                directoryPickerDialog.show()
+                uploadFile()
+
             }
         }
 
@@ -165,7 +154,23 @@ class MainFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
 
-            UploadService.startService(requireActivity(), filePath!!)
+            if (filePath.isNullOrEmpty()){
+                val directoryPickerDialog = DirectoryPickerDialog(requireActivity(),
+                    { Toast.makeText(requireActivity(), "Canceled!!", Toast.LENGTH_SHORT).show() }
+                ) { files ->
+                    /*Toast.makeText(
+                        requireActivity(),
+                        files.get(0).getPath(),
+                        Toast.LENGTH_SHORT
+                    ).show()*/
+                    filePath =  files.get(0).getPath()
+                    UploadService.startService(requireActivity(), filePath!!)
+
+                }
+                directoryPickerDialog.show()
+            }else{
+                UploadService.startService(requireActivity(), filePath!!)
+            }
 
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.txt_storage_rationale),
